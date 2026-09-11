@@ -1,0 +1,20 @@
+name: A-baseline-no-callee
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  inline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const tok = process.env.ACTIONS_RUNTIME_TOKEN || '';
+            core.info('ARM          : BASELINE-NO-CALLEE');
+            core.info('trigger      : ' + context.eventName);
+            core.info('CACHE_MODE   : [' + (process.env.ACTIONS_CACHE_MODE || '') + ']');
+            if (!tok) { core.info('ac           : NO-RUNTIME-TOKEN-VOID'); return; }
+            const p = tok.split('.');
+            const pad = s => s + '='.repeat((4 - s.length % 4) % 4);
+            const cl = JSON.parse(Buffer.from(pad(p[1].replace(/-/g,'+').replace(/_/g,'/')),'base64').toString());
+            core.info('ac           : ' + JSON.stringify(cl.ac === undefined ? 'ABSENT' : cl.ac));
