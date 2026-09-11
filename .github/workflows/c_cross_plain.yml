@@ -1,0 +1,7 @@
+name: C-cross-callee-declares-nothing
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  call:
+    uses: mr-benty/vfy8516-callee-1789131629/.github/workflows/plain.yml@main
