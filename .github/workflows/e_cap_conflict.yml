@@ -1,0 +1,8 @@
+name: E-caller-caps-read-callee-wants-write
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  call:
+    cache-mode: read
+    uses: mr-benty/vfy8516-callee-1789131629/.github/workflows/inspect.yml@main
