@@ -1,0 +1,8 @@
+name: F-caller-caps-read-callee-silent
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  call:
+    cache-mode: read
+    uses: mr-benty/vfy8516-callee-1789131629/.github/workflows/plain.yml@main
